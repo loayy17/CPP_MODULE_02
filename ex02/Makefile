@@ -3,10 +3,10 @@ CXXFLAGS = -Wall -Wextra -Werror
 SRCS = main.cpp Fixed.cpp
 OBJS = ${SRCS:.cpp=.o}
 
-${NAME} : ${OBJS}
+a.out : ${OBJS}
 		${CXX} ${CXXFLAGS} ${OBJS} 
 
-all: ${NAME}
+all: a.out
 
 clean: 
 		rm -rf ${OBJS}

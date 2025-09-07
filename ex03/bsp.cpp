@@ -1,25 +1,25 @@
 #include "Point.hpp"
-#include <cmath>
 
-float	area_triangle(Point const a, Point const b, Point const c)
+Fixed	area_triangle(Point const a, Point const b, Point const c)
 {
-	return (std::abs(0.5f * (a.getX() * (b.getY() - c.getY()) + b.getX()
-				* (c.getY() - a.getY()) + c.getX() * (a.getY()
-					- b.getY())).toFloat()));
+	Fixed	result;
+
+	result = (a.getX() * (b.getY() - c.getY()) + b.getX() * (c.getY()
+				- a.getY()) + c.getX() * (a.getY() - b.getY())) / Fixed(2);
+	if (result < Fixed(0))
+		result = result * Fixed(-1);
+	return (result);
 }
 bool	bsp(Point const a, Point const b, Point const c, Point const point)
 {
-	/*
-	a
-	| |
-	| | |
-	b | | c
-	*/
 	Fixed area_abc = area_triangle(a, b, c);
 	Fixed area_abp = area_triangle(a, b, point);
 	Fixed area_acp = area_triangle(a, c, point);
 	Fixed area_bcp = area_triangle(b, c, point);
-	if (area_abc == 0 || area_abp == 0 || area_acp == 0 || area_bcp == 0 || area_abc != area_abp + area_acp + area_bcp)
+
+	if (area_abc == Fixed(0) || area_abp == Fixed(0) || area_acp == Fixed(0)
+		|| area_bcp == Fixed(0))
 		return (false);
-	return (true);
+
+	return (area_abc == area_abp + area_acp + area_bcp);
 }
