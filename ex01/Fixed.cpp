@@ -46,11 +46,11 @@ Fixed::Fixed(const int integer)
 Fixed::Fixed(const float number)
 {
 	std::cout << "Float constructor called" << std::endl;
-	_value = (int)(roundf(number * (1 << _fractionalBits)));
+	_value = (int)(roundf(number * (1 << _fractionalBits))); // 100000000 = 256
 }
 float Fixed::toFloat(void) const
 {
-	return (float)(_value) / (1 << _fractionalBits);
+	return (float)(_value) / (1 << _fractionalBits); // 256
 }
 int Fixed::toInt(void) const
 {
@@ -62,3 +62,20 @@ std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 	out << fixed.toFloat();
 	return (out);
 }
+// steps to convert float to fixed point
+// 1. multiply the float by 2^fractionalBits (1 << fractionalBits)
+// 2. round the result to the nearest integer
+// 3. store the integer in the _value variable
+// steps to int to fixed point
+// 1. divide the integer by 2^fractionalBits (1 << fractionalBits)
+// 2. return the result as an integer
+// example:
+// float number = 42.42f
+// fractionalBits = 8
+// 1. 42.42 * 256 = 10859.52
+// 2. round(10859.52) = 10860
+// 3. _value = 10860
+// to convert back to float
+// 1. 10860 / 256 = 42.421875
+// to convert back to int
+// 1. 10860 >> 8 = 42

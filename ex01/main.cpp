@@ -19,3 +19,7 @@ int	main(void)
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 	return (0);
 }
+
+// example:
+// 42.42 toInt = 42
+// 42 ro float = 42.0
