@@ -98,16 +98,17 @@ Fixed Fixed::operator/(const Fixed &other) const
 {
 	if (other._value == 0)
 	{
-		throw std::runtime_error("Division by zero");
+		std::cerr << "Error: Division by zero" << std::endl;
+		return (Fixed(0));
 	}
 	return (Fixed(this->toFloat() / other.toFloat()));
 }
-Fixed &Fixed::operator++()
+Fixed &Fixed::operator++() // Prefix increment ++a
 {
 	++this->_value;
 	return (*this);
 }
-Fixed Fixed::operator++(int)
+Fixed Fixed::operator++(int) // Postfix increment a++
 {
 	Fixed temp(*this);
 	++this->_value;
